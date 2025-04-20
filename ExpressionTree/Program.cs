@@ -13,7 +13,15 @@ namespace ExpressionTree
     {
         static void Main()
         {
-            Student student = new Student() { StudentID = 101, StudentName = "Shoaib Ali", Age = 42 };
+            Student student = new Student() { StudentID = 101, StudentName = "Shoaib Ali", Age = 13 };
+
+            Expression<Func<Student, bool>> expression = std => std.Age > 12 && std.Age < 20; // return true or false
+
+            Func<Student, bool> myDelegate = expression.Compile();
+
+            bool result = myDelegate.Invoke(student);
+            Console.WriteLine(result);
+            /*
             // Create expression tree with Func
             Expression<Func<int, int>> expression = a => a * a;//receiving parameter a and return square value
 
@@ -22,6 +30,7 @@ namespace ExpressionTree
 
             // Execute the method
             Console.WriteLine(myDelegate.Invoke(10));
+            */
         }
     }
 }
